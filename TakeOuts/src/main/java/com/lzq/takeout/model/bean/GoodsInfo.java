@@ -116,5 +116,16 @@ public class GoodsInfo {
 				+ monthSaleNum + ", bargainPrice=" + bargainPrice + ", isNew=" + isNew + ", newPrice=" + newPrice
 				+ ", oldPrice=" + oldPrice + "]";
 	}
-    
+int TypeId;
+    public void setTypeId(int id) {
+		this.TypeId=id;
+    }
+private String mTypeName;
+	public void setTypeName(String typeName) {
+		mTypeName = typeName;
+	}
+
+	public int getTypeId() {
+		return TypeId;
+	}
 }

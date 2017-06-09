@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import com.lzq.takeout.R;
 import com.lzq.takeout.view.fragments.HomeFragment;
 import com.lzq.takeout.view.fragments.MoreFragment;
-import com.lzq.takeout.view.fragments.OlderFragment;
+import com.lzq.takeout.view.fragments.OrderFragment;
 import com.lzq.takeout.view.fragments.UserFragment;
 
 import java.util.ArrayList;
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
      mMainBottomeSwitcherContainer.setBackgroundColor(getResources().getColor(R.color.colorBottom));
         initFragment();
         initBottemNavigation();
+
         refretChildUiByIndex(0);
     }
 
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initFragment() {
         mFragmentList.add(new HomeFragment());
-        mFragmentList.add(new OlderFragment());
+        mFragmentList.add(new OrderFragment());
         mFragmentList.add(new UserFragment());
         mFragmentList.add(new MoreFragment());
 

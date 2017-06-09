@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.lzq.takeout.model.bean.User;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by ${廖昭启} on 2017/6/6.
  */
@@ -16,10 +18,12 @@ public class TakeOutApp extends Application {
         mUser  = new User();
         mUser.setId(-1);
         initSSDK();
-        initJgPush();
+       // initJgPush();
     }
 
     private void initJgPush() {
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
 
     }
 

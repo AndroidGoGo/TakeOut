@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.lzq.takeout.R;
 import com.lzq.takeout.presenter.LoginActivityPresenter;
-import com.lzq.takeout.util.SMSUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -93,13 +92,16 @@ public class LoginActivity extends Activity {
     };
     int time = 10;
 
-    @OnClick({R.id.tv_user_code, R.id.login})
+    @OnClick({R.id.tv_user_code, R.id.login,R.id.iv_user_back})
     public void onViewClicked(View view) {
         mPhoneNumber = mEtUserPhone.getText().toString().trim();
-        if (!SMSUtil.judgePhoneNums(this,mPhoneNumber)){
+     /*   if (!SMSUtil.judgePhoneNums(this,mPhoneNumber)){
             return;
-        }
+        }*/
         switch (view.getId()) {
+            case R.id.iv_user_back:
+                finish();
+                break;
 
             case R.id.tv_user_code:
 
@@ -116,15 +118,15 @@ public class LoginActivity extends Activity {
                 break;
             case R.id.login:
                // submitVerificationCode(String country, String phone, String code)
-                mConfiCode = mEtUserCode.getText().toString().trim();
+               /* mConfiCode = mEtUserCode.getText().toString().trim();
                 if(mConfiCode.isEmpty()){
                     Toast.makeText(mContext,"验证码不能为空",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    SMSSDK.submitVerificationCode("86", mPhoneNumber, mConfiCode);//提交
+                    SMSSDK.submitVerificationCode("86", mPhoneNumber, mConfiCode);//提交*/
                     mPresenter.loginByPhone(mPhoneNumber,2);
 
-                }
+               // }
 
 
                 break;

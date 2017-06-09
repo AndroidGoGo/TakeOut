@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.lzq.takeout.R;
 import com.lzq.takeout.base.TakeOutApp;
+import com.lzq.takeout.view.adapter.OrderAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,7 +22,7 @@ import butterknife.ButterKnife;
  * Created by ${廖昭启} on 2017/6/5.
  */
 
-public class OlderFragment extends Fragment {
+public class OrderFragment extends Fragment {
     @Bind(R.id.rv_order_list)
     RecyclerView mRvOrderList;
     @Bind(R.id.srl_order)
@@ -34,6 +35,7 @@ public class OlderFragment extends Fragment {
 
         ButterKnife.bind(this, view);
         mRvOrderList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRvOrderList.setAdapter(new OrderAdapter(getActivity()));
         return view;
     }
 

@@ -48,7 +48,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 return titleHolder;
             case TYPE_SELL:
                 View view2 = View.inflate(mContext, R.layout.item_seller, null);
-                SellHolder sellHolder = new SellHolder(view2);
+                SellHolder sellHolder = new SellHolder(mContext,view2);
                 return sellHolder;
             default:
                 return null;

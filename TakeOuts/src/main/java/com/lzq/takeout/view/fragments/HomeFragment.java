@@ -53,6 +53,7 @@ public class HomeFragment extends Fragment {
         mHomeFragmentPresenter = new HomeFragmentPresenter(this);
         mHomeAdapter = new HomeAdapter(getActivity());
         mRvHome.setAdapter(mHomeAdapter);
+
         return view;
     }
 

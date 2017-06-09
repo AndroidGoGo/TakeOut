@@ -14,6 +14,11 @@ public interface TakeOutService {
     @GET("home")
     Call<ResponseInfo> getHomeInfo();
 
-@GET("login")
-    Call<ResponseInfo> loginByPhone(@Query("phone") String phoneNumber, @Query("i") int i);
+    @GET("login")
+    Call<ResponseInfo> loginByPhone(@Query("phone") String phoneNumber, @Query("type") int i);
+
+    @GET("order")
+    Call<ResponseInfo> getOrderList(@Query("userId") String id);
+    @GET("business")
+    Call<ResponseInfo> loadBusinesInfo(@Query("sellerId") int id);
 }

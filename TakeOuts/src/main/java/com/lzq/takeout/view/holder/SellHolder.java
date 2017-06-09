@@ -1,5 +1,7 @@
 package com.lzq.takeout.view.holder;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 
 import com.lzq.takeout.R;
 import com.lzq.takeout.model.bean.Seller;
+import com.lzq.takeout.view.activity.BusinessActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,12 +34,28 @@ public class SellHolder extends RecyclerView.ViewHolder {
     TextView mTvHomeSendPrice;
     @Bind(R.id.tv_home_distance)
     TextView mTvHomeDistance;
-    public SellHolder(View view) {
+    private  Seller  mSeller;
+    private  Context mContext;
+    public SellHolder(Context context,View view) {
         super(view);
+        mContext = context;
         ButterKnife.bind(this, view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,BusinessActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
+
     }
 
     public void setDatas(Seller seller) {
+        this.mSeller = seller;
 mTvTitle.setText(seller.getName());
+        mRatingBar.setRating(Float.parseFloat(seller.getScore()));
+        mTvHomeSale.setText("月售" + seller.getSale() + "单");
+        mTvHomeSendPrice.setText("￥" + seller.getSendPrice() + "起送/配送费￥" + seller.getDeliveryFee());
+        mTvHomeDistance.setText(seller.getDistance());
     }
 }
