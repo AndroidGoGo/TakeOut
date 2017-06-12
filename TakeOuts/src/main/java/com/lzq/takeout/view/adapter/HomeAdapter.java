@@ -22,6 +22,8 @@ import static android.content.ContentValues.TAG;
 
 public class HomeAdapter extends RecyclerView.Adapter {
     Context mContext;
+private  Seller mSeller;
+    private int position;
 
     public HomeAdapter(Context context) {
         mContext = context;
@@ -48,7 +50,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 return titleHolder;
             case TYPE_SELL:
                 View view2 = View.inflate(mContext, R.layout.item_seller, null);
-                SellHolder sellHolder = new SellHolder(mContext,view2);
+                SellHolder sellHolder = new SellHolder(mContext,view2,mSellerDatas.get(position));
                 return sellHolder;
             default:
                 return null;
@@ -70,6 +72,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
             case TYPE_SELL:
                 SellHolder sellHolder = (SellHolder) holder;
                 sellHolder.setDatas(mSellerDatas.get(position));
+                this.position=position;
                 break;
 
         }

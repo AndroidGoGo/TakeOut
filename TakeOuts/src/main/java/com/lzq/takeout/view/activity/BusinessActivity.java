@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -32,6 +33,7 @@ import butterknife.OnClick;
  */
 
 public class BusinessActivity extends Activity {
+    private static final String TAG ="BusinessActivity" ;
     @Bind(R.id.ib_back)
     ImageButton mIbBack;
     @Bind(R.id.tv_title)
@@ -67,13 +69,26 @@ List<Fragment> mFragmentList   = new ArrayList<>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business);
         ButterKnife.bind(this);
+        initSellerInfo();
         initFragment();
+
         BusinessFragmentPagerAdapter businessFragmentPagerAdapter = new BusinessFragmentPagerAdapter(getFragmentManager());
         businessFragmentPagerAdapter.setFragmentList(mFragmentList);
         mVp.setAdapter(businessFragmentPagerAdapter);
         mTabs.setupWithViewPager(mVp);
 
     }
+
+    private void initSellerInfo() {
+        if (getIntent()!=null){
+           Seller seller = (Seller) getIntent().getSerializableExtra("seller");
+            this.mSeller=seller;
+
+        }
+        Log.d(TAG,"mSeller"+mSeller.getName());
+
+    }
+
     @OnClick({R.id.ib_back, R.id.tvSubmit})
     public void onClick(View view) {
         switch (view.getId()) {

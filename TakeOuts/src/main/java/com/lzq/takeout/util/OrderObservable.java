@@ -12,13 +12,14 @@ import java.util.Observable;
  */
 
 public class OrderObservable extends Observable {
-    public  static  OrderObservable sOrderObservable = new OrderObservable();
+    public static OrderObservable sOrderObservable = new OrderObservable();
 
     private OrderObservable() {
 
     }
-    public  static OrderObservable  getInstance(){
-        return  sOrderObservable;
+
+    public static OrderObservable getInstance() {
+        return sOrderObservable;
     }
 
     /* 订单状态
@@ -35,19 +36,19 @@ public class OrderObservable extends Observable {
     public static final String ORDERTYPE_SERVED = "50";
     public static final String ORDERTYPE_CANCELLEDORDER = "60";
 
-public  void newMsgComing(String extra){
-    Map<String,String>  msg = proceesJson(extra);
+    public void newMsgComing(String extra) {
+        Map<String, String> msg = proceesJson(extra);
 
-}
+    }
 
-    private Map<String,String> proceesJson(String extra) {
+    private Map<String, String> proceesJson(String extra) {
         Map<String, String> hashMap = new HashMap<>();
         try {
             JSONObject jsonObject = new JSONObject(extra);
             String orderId = jsonObject.getString("orderId");
             String type = jsonObject.getString("type");
-            hashMap.put("orderId",orderId);
-            hashMap.put("type",type+"");
+            hashMap.put("orderId", orderId);
+            hashMap.put("type", type + "");
             return hashMap;
         } catch (JSONException e) {
             e.printStackTrace();

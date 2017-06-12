@@ -1,6 +1,8 @@
 package com.lzq.takeout.presenter;
 
+import android.util.Log;
 import android.widget.AbsListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,13 +23,16 @@ import retrofit2.Call;
  * Created by ${廖昭启} on 2017/6/8.
  */
 
-public class GoodsFragmentPresenter extends NetPresenter{
+public class GoodsFragmentPresenter extends NetPresenter {
+    private static final String TAG = "GoodsFragmentPresenter";
     private GoodsFragment mGoodsFragment;
     private List<GoodsInfo> mAllTypeGoodsList;
     public List<GoodsTypeInfo> mGoodsTypeInfoList;
-    public GoodsFragmentPresenter(GoodsFragment goodsFragment){
-        mGoodsFragment=goodsFragment;
+
+    public GoodsFragmentPresenter(GoodsFragment goodsFragment) {
+        mGoodsFragment = goodsFragment;
     }
+
     @Override
     protected void onFailRespone(String message) {
 
@@ -40,6 +45,7 @@ public class GoodsFragmentPresenter extends NetPresenter{
 
     @Override
     protected void OnSuccess(String data) {
+        Toast.makeText(mGoodsFragment.getActivity(),"商品详情请求成功",Toast.LENGTH_SHORT).show();
         mAllTypeGoodsList = new ArrayList<>();
         //可以解析了
         Gson gson = new Gson();
@@ -64,6 +70,11 @@ public class GoodsFragmentPresenter extends NetPresenter{
                 }
             }
             mGoodsFragment.onAllGoodsSuccess(mAllTypeGoodsList);
+            if(mAllTypeGoodsList==null){
+                Toast.makeText(mGoodsFragment.getActivity(),"妹获取到商品列表",Toast.LENGTH_SHORT).show();
+                Log.d(TAG,"没获取到数据");
+                return;
+            }
             //有数据后添加滚动
             mGoodsFragment.mSlhlv.setOnScrollListener(new AbsListView.OnScrollListener() {
                 @Override
@@ -95,7 +106,8 @@ public class GoodsFragmentPresenter extends NetPresenter{
         }
 
     }
-//TODO:
+
+    //TODO:
     private int getTypeIndexByTypeId(int newTypeId) {
         return 0;
     }
@@ -104,5 +116,19 @@ public class GoodsFragmentPresenter extends NetPresenter{
         Call<ResponseInfo> infoCall = mTakeOutService.loadBusinesInfo((int) id);
         infoCall.enqueue(mCallback);
 
+    }
+
+    public int getPositionById(int id) {
+        int position = -1;
+        if (mAllTypeGoodsList != null) {
+            for (int i = 0; i < mAllTypeGoodsList.size(); i++) {
+                GoodsInfo goodsInfo = mAllTypeGoodsList.get(i);
+                if (goodsInfo.getTypeId() == id) {
+                    position = i;
+                    break;
+                }
+            }
+        }
+        return position;
     }
 }

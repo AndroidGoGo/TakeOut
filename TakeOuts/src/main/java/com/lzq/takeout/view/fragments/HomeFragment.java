@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
     ArgbEvaluator mEvaluator = new ArgbEvaluator();
     private HomeFragmentPresenter mHomeFragmentPresenter;
     private HomeAdapter mHomeAdapter;
-
+private  Seller mSeller;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class HomeFragment extends Fragment {
         ButterKnife.bind(this, view);
         mRvHome.setLayoutManager(new LinearLayoutManager(getActivity()));
         mHomeFragmentPresenter = new HomeFragmentPresenter(this);
+
         mHomeAdapter = new HomeAdapter(getActivity());
         mRvHome.setAdapter(mHomeAdapter);
 

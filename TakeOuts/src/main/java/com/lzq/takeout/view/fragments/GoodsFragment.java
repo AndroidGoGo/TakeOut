@@ -3,7 +3,9 @@ package com.lzq.takeout.view.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ import butterknife.ButterKnife;
  */
 
 public class GoodsFragment extends Fragment {
+    private static final String TAG ="GoodsFragment" ;
     @Bind(R.id.rv_goods_type)
     RecyclerView mRvGoodsType;
     @Bind(R.id.slhlv)
@@ -42,9 +45,17 @@ public class GoodsFragment extends Fragment {
 
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_goods, container, false);
 
-        ButterKnife.bind(this, super.onCreateView(inflater, container, savedInstanceState));
+        ButterKnife.bind(this, view);
+        mGoodsTypeRVAdapter = new GoodsTypeRVAdapter(this);
         mGoodsFragmentPresenter = new GoodsFragmentPresenter(this);
+        mRvGoodsType.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvGoodsType.setAdapter(mGoodsTypeRVAdapter);
+
+        mGoodsAdapter = new GoodsAdapter(this);
+
+       mSlhlv.setAdapter(mGoodsAdapter);
+
+
         return view;
     }
 
@@ -62,9 +73,22 @@ public class GoodsFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    public void onAllGoodsSuccess(List<GoodsInfo> allTypeGoodsList) {
+    public void onAllGoodsSuccess(List<GoodsInfo> allGoodsList) {
+        Log.d(TAG,"加载到数据");
+        int count = allGoodsList.size();
+        for (int i=0;i<count;i++){
+          //  Log.d("商品详情",allGoodsList.get(i).getName());
+        }
+
+        mGoodsAdapter.getGoodsInfos(allGoodsList);
     }
 
     public void onGoodsTypeSuccess(List<GoodsTypeInfo> goodsTypeInfoList) {
+        Log.d(TAG,"商品列表获得数据");
+        mGoodsTypeRVAdapter.setGoodsTypeInfoList(goodsTypeInfoList);
+        int count = goodsTypeInfoList.size();
+        for (int i = 0;i<count;i++){
+           // Log.d("商品列表获得数据",goodsTypeInfoList.get(i).getName());
+        }
     }
 }

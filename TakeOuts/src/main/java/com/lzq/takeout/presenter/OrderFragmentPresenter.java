@@ -1,5 +1,7 @@
 package com.lzq.takeout.presenter;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lzq.takeout.model.bean.Order;
@@ -14,16 +16,19 @@ import retrofit2.Call;
  * Created by ${廖昭启} on 2017/6/8.
  */
 
-public class OrderFragmentPresenter extends  NetPresenter {
+public class OrderFragmentPresenter extends NetPresenter {
+    private static final String TAG = "OrderFragmentPresenter";
     private OrderFragment mOrderFragment;
 
     public OrderFragmentPresenter(OrderFragment orderFragment) {
         mOrderFragment = orderFragment;
     }
-protected  void  getOrderList(String id){
-    Call<ResponseInfo>  mCall = mTakeOutService.getOrderList(id);
-    mCall.enqueue(mCallback);
-}
+
+    public void getOrderList(String id) {
+        Call<ResponseInfo> mCall = mTakeOutService.getOrderList(id);
+        mCall.enqueue(mCallback);
+    }
+
     @Override
     protected void onFailRespone(String message) {
 
@@ -36,7 +41,10 @@ protected  void  getOrderList(String id){
 
     @Override
     protected void OnSuccess(String data) {
-        Gson  mGson = new Gson();
-        List<Order>  orderList  = mGson.fromJson(data,new TypeToken<List<Order>>(){}.getType());
+        Gson mGson = new Gson();
+        List<Order> orderList = mGson.fromJson(data, new TypeToken<List<Order>>() {
+        }.getType());
+        Log.d(TAG,orderList.toString());
+        mOrderFragment.LoadOrdeInfo(orderList);
     }
 }

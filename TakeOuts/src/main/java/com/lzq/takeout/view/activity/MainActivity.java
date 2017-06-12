@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       hideBottomUIMenu();
+        hideBottomUIMenu();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-     mMainBottomeSwitcherContainer.setBackgroundColor(getResources().getColor(R.color.colorBottom));
+        mMainBottomeSwitcherContainer.setBackgroundColor(getResources().getColor(R.color.colorBottom));
         initFragment();
         initBottemNavigation();
 
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.main_fragment_container,mFragmentList.get(indexOfChild)).commit();
+        fragmentManager.beginTransaction().replace(R.id.main_fragment_container, mFragmentList.get(indexOfChild)).commit();
     }
 
     private void setEnable(View childAt, boolean b) {
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             int childCount = viewGroup.getChildCount();
             for (int i = 0; i < childCount; i++) {
                 View childAt1 = viewGroup.getChildAt(i);
-             setEnable(childAt1, b);
+                setEnable(childAt1, b);
             }
 
         }
@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     protected void hideBottomUIMenu() {
         //隐藏虚拟按键，并且全屏
         if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             View decorView = getWindow().getDecorView();
             getWindow().setStatusBarColor(Color.TRANSPARENT);
             int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY ;
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
             decorView.setSystemUiVisibility(uiOptions);
             //| View.SYSTEM_UI_FLAG_FULLSCREEN
         }

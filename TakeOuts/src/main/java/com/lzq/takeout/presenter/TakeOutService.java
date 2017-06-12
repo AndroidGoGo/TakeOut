@@ -21,4 +21,5 @@ public interface TakeOutService {
     Call<ResponseInfo> getOrderList(@Query("userId") String id);
     @GET("business")
     Call<ResponseInfo> loadBusinesInfo(@Query("sellerId") int id);
+
 }

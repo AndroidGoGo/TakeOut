@@ -3,6 +3,7 @@ package com.lzq.takeout.view.holder;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -20,6 +21,7 @@ import butterknife.ButterKnife;
  */
 
 public class SellHolder extends RecyclerView.ViewHolder {
+    private static final String TAG = "SellHolder";
     @Bind(R.id.seller_logo)
     ImageView mSellerLogo;
     @Bind(R.id.tvCount)
@@ -34,16 +36,19 @@ public class SellHolder extends RecyclerView.ViewHolder {
     TextView mTvHomeSendPrice;
     @Bind(R.id.tv_home_distance)
     TextView mTvHomeDistance;
-    private  Seller  mSeller;
+    public   Seller  mSeller;
     private  Context mContext;
-    public SellHolder(Context context,View view) {
+    public SellHolder(Context context, View view, Seller seller) {
         super(view);
         mContext = context;
+        mSeller=seller;
         ButterKnife.bind(this, view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext,BusinessActivity.class);
+                intent.putExtra("seller",mSeller);
+                Log.d(TAG,"mSeller"+mSeller.getName());
                 mContext.startActivity(intent);
             }
         });
